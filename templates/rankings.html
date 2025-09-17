@@ -3,6 +3,8 @@
 <head>
     <meta charset="UTF-8">
     <title>User Streak Rankings</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+    <link rel="icon" type="image/x-icon" href="{{ url_for('static', filename='favicon.ico') }}">
 </head>
 <body>
     <nav>
@@ -10,7 +12,7 @@
         <a href="{{ url_for('rankings') }}">Rankings</a>
     </nav>
     
-    <table border="1">
+    <table class="rankings-table">
         <tr>
             <th>Rank</th>
             <th>Username</th>

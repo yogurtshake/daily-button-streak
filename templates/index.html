@@ -3,9 +3,8 @@
 <head>
     <meta charset="UTF-8">
     <title>Daily Button Streak</title>
-    <style>
-        #main-content { display: none; }
-    </style>
+    <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+    <link rel="icon" type="image/x-icon" href="{{ url_for('static', filename='favicon.ico') }}">
 </head>
 <body>
     <nav>
@@ -25,13 +24,14 @@
         <form id="change-username-form" autocomplete="off" style="margin-bottom: 1em;">
             <label for="main-username-input">Username:</label>
             <input type="text" id="main-username-input" placeholder="Username">
-            <button type="submit">Change</button>
+            <button type="submit" class="small-button">Change</button>
         </form>
 
         <p>Welcome, <span id="username-display"></span></p>
         <p>Streak: <span id="streak-count">0</span> days</p>
         <p>Time left today: <span id="timer"></span></p>
         <button id="streak-btn">Button</button>
+        <p id="button-message"></p>
     </div>
 
     <script src="{{ url_for('static', filename='stuff.js') }}"></script>

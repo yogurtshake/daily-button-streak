@@ -1,0 +1,220 @@
+body {
+  font-family: "Segoe UI", Tahoma, Geneva, Verdana, sans-serif;
+  background: linear-gradient(to right, #e0f7fa, #ffffff);
+  color: #333;
+  margin: 0;
+  min-height: 100vh;
+}
+
+h1, h2 {
+  color: rgb(255, 145, 0);
+  margin-bottom: 1.2rem;
+  text-align: center;
+}
+
+nav {
+  display: flex;
+  justify-content: center;
+  gap: 1.5rem;
+  margin-bottom: 2rem;
+  padding: 0.5em 1em;
+}
+
+nav a {
+  color: #ff9800;
+  background: #fff3e0;
+  border: 1px solid #ffb74d;
+  border-radius: 6px;
+  padding: 0.4rem 1rem;
+  font-weight: 600;
+  text-decoration: none;
+  cursor: pointer;
+  transition: background 0.2s, color 0.2s;
+}
+
+nav a.active,
+nav a:hover {
+  background: rgb(255, 145, 0);
+  color: #fff;
+}
+
+form {
+  display: flex;
+  flex-direction: row;
+  gap: 1rem;
+  margin: 1.5rem 0;
+  align-items: center;
+}
+
+label {
+  text-align: left;
+  font-weight: 600;
+}
+
+input {
+  padding: 0.6rem;
+  border: 1px solid #ccc;
+  border-radius: 6px;
+  font-size: 1rem;
+  width: 100%;
+  max-width: 300px;
+}
+
+button[type="submit"], button[type="button"], #streak-btn {
+  background-color: rgb(255, 145, 0);
+  color: white;
+  border: none;
+  border-radius: 6px;
+  padding: 0.7rem 1.5rem;
+  font-size: 1rem;
+  cursor: pointer;
+  transition: background-color 0.3s;
+  margin-top: 0.5rem;
+}
+
+button[type="submit"]:hover,
+button[type="button"]:hover,
+#streak-btn:hover {
+  background-color: rgb(110, 77, 27);
+}
+
+#button-message {
+  color: #00796b;
+  background: #e0f2f1;
+  border-left: 4px solid #00796b;
+  padding: 0.5rem 1rem;
+  border-radius: 5px;
+  font-size: 1rem;
+  text-align: center;
+  margin-top: 1rem;
+}
+
+@media (max-width: 700px) {
+  nav {
+    flex-direction: column;
+    gap: 0.7rem;
+    margin-bottom: 1rem;
+  }
+  form {
+    padding: 0.5rem;
+    gap: 0.7rem;
+  }
+  input {
+    max-width: 100vw;
+    font-size: 1em;
+    padding: 0.5rem;
+  }
+}
+
+table {
+  width: 100%;
+  border-collapse: collapse;
+  margin-top: 1.5rem;
+  background: #fafafa;
+  border-radius: 8px;
+  overflow: hidden;
+  box-shadow: 0 2px 8px rgba(0,0,0,0.06);
+}
+
+th, td {
+  padding: 0.75rem 1rem;
+  text-align: center;
+}
+
+th {
+  background: #ffe0b2;
+  color: #ff9800;
+  font-weight: 700;
+}
+
+tr:nth-child(even) {
+  background: #f5f5f5;
+}
+
+tr:hover {
+  background: #ffe0b2;
+}
+
+/* Responsive table */
+@media (max-width: 700px) {
+  table {
+    font-size: 0.95em;
+    padding: 0.2rem;
+    border-radius: 0;
+  }
+  th, td {
+    padding: 0.5rem 0.3rem;
+  }
+}
+
+.rankings-table {
+  width: 100%;
+  max-width: 420px;
+  margin: 2rem auto 0 auto;
+  border-collapse: separate;
+  border-spacing: 0;
+  background: #fafafa;
+  border-radius: 14px;
+  overflow: hidden;
+  box-shadow: 0 2px 8px rgba(0,0,0,0.08);
+}
+
+.rankings-table th, .rankings-table td {
+  text-align: center;
+  padding: 1rem 1.2rem;
+  font-size: 1.08rem;
+}
+
+.rankings-table th {
+  background: #ffe0b2;
+  color: #ff9800;
+  font-weight: 700;
+  border: none;
+}
+
+.rankings-table tr {
+  border: none;
+}
+
+.rankings-table tr:nth-child(even) {
+  background: #f5f5f5;
+}
+
+.rankings-table tr:nth-child(odd) {
+  background: #fafafa;
+}
+
+.rankings-table tr:hover {
+  background: #ffe0b2;
+}
+
+.rankings-table td, .rankings-table th {
+  border: none;
+}
+
+@media (max-width: 700px) {
+  .rankings-table {
+    font-size: 0.98em;
+    max-width: 98vw;
+  }
+  .rankings-table th, .rankings-table td {
+    padding: 0.7rem 0.5rem;
+  }
+}
+
+.small-button {
+  padding: 0.3rem 0.7rem !important;
+  font-size: 0.95rem !important;
+  min-width: 60px !important;
+  background-color: rgb(255, 145, 0);
+  color: white;
+  border: none;
+  border-radius: 6px;
+  cursor: pointer;
+  transition: background-color 0.3s;
+  margin-top: 0.5rem;
+}
+
+.small-button:hover {
+  background-color: rgb(110, 77, 27);
+}
