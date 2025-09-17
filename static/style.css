@@ -17,7 +17,7 @@ nav {
   justify-content: center;
   gap: 1.5rem;
   margin-bottom: 2rem;
-  padding: 0.5em 1em;
+  padding: 2em 1em 0.5em 1em;
 }
 
 nav a {
@@ -80,8 +80,6 @@ button[type="button"]:hover,
 
 #button-message {
   color: #00796b;
-  background: #e0f2f1;
-  border-left: 4px solid #00796b;
   padding: 0.5rem 1rem;
   border-radius: 5px;
   font-size: 1rem;
@@ -135,7 +133,6 @@ tr:hover {
   background: #ffe0b2;
 }
 
-/* Responsive table */
 @media (max-width: 700px) {
   table {
     font-size: 0.95em;
@@ -217,4 +214,34 @@ tr:hover {
 
 .small-button:hover {
   background-color: rgb(110, 77, 27);
+}
+
+.container {
+  background: white;
+  padding: 2rem 3rem;
+  border-radius: 12px;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+  max-width: 400px;
+  width: 100%;
+  text-align: center;
+}
+
+.main {
+  display: flex;
+  justify-content: center;
+  align-items: flex-start;
+  height: auto;
+  margin: 0;
+  padding-top: 4rem; 
+  min-height: 100vh;
+}
+
+#change-username-form input {
+  flex: 1 1 0;
+  min-width: 0;
+  max-width: 200px;
+}
+
+#main-content {
+  display: none;
 }

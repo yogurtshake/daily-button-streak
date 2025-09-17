@@ -22,7 +22,7 @@ document.addEventListener('DOMContentLoaded', function() {
             .then(res => res.json())
             .then(data => {
                 document.getElementById('streak-count').textContent = data.streak;
-                document.getElementById('button-message').textContent = "come back tomorrow";
+                document.getElementById('button-message').textContent = "Well done. Come back tomorrow.";
             });
         };
 
