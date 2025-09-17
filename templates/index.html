@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Daily Button Streak</title>
+    <style>
+        #main-content { display: none; }
+    </style>
+</head>
+<body>
+    <div id="login-form">
+        <h2>Enter your username</h2>
+        <form id="login-real-form" autocomplete="off">
+            <input type="text" id="username-input" placeholder="Username" autofocus>
+            <button type="submit" id="login-btn">Enter</button>
+        </form>
+    </div>
+
+    <div id="main-content">
+        <h1>Daily Button Streak</h1>
+        
+        <form id="change-username-form" autocomplete="off" style="margin-bottom: 1em;">
+            <label for="main-username-input">Username:</label>
+            <input type="text" id="main-username-input" placeholder="Username">
+            <button type="submit">Change</button>
+        </form>
+
+        <p>Welcome, <span id="username-display"></span></p>
+        <p>Your current streak: <span id="streak-count">0</span> days</p>
+        <button id="streak-btn">Button</button>
+        <p><a href="{{ url_for('rankings') }}">View Rankings</a></p>
+    </div>
+
+    <script src="{{ url_for('static', filename='stuff.js') }}"></script>
+</body>
+</html>

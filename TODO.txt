@@ -1,0 +1,3 @@
+-enforce EST/EDT
+-display countdown timer for remaining time in day
+-make sure time changes with daylight savings

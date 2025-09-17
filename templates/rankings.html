@@ -1,0 +1,25 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>User Streak Rankings</title>
+</head>
+<body>
+    <h1>User Streak Rankings</h1>
+    <table border="1">
+        <tr>
+            <th>Rank</th>
+            <th>Username</th>
+            <th>Streak</th>
+        </tr>
+        {% for username, data in rankings %}
+        <tr>
+            <td>{{ loop.index }}</td>
+            <td>{{ username }}</td>
+            <td>{{ data.streak }}</td>
+        </tr>
+        {% endfor %}
+    </table>
+    <p><a href="{{ url_for('index') }}">Back to main page</a></p>
+</body>
+</html>
