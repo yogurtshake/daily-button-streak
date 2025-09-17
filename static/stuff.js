@@ -22,6 +22,7 @@ document.addEventListener('DOMContentLoaded', function() {
             .then(res => res.json())
             .then(data => {
                 document.getElementById('streak-count').textContent = data.streak;
+                document.getElementById('button-message').textContent = "come back tomorrow";
             });
         };
 
@@ -44,7 +45,6 @@ document.addEventListener('DOMContentLoaded', function() {
     if (username) {
         showMain();
     } else {
-        // Listen for the login form submit event
         document.getElementById('login-real-form').onsubmit = function(e) {
             e.preventDefault();
             const input = document.getElementById('username-input').value.trim();
