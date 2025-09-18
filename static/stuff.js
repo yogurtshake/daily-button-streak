@@ -11,6 +11,11 @@ document.addEventListener('DOMContentLoaded', function() {
             .then(res => res.json())
             .then(data => {
                 document.getElementById('streak-count').textContent = data.streak;
+                if (data.clicked_today) {
+                    document.getElementById('button-message').textContent = "Well done. Come back tomorrow.";
+                } else {
+                    document.getElementById('button-message').textContent = "";
+                }
             });
 
         document.getElementById('streak-btn').onclick = function() {
@@ -37,6 +42,11 @@ document.addEventListener('DOMContentLoaded', function() {
                     .then(res => res.json())
                     .then(data => {
                         document.getElementById('streak-count').textContent = data.streak;
+                        if (data.clicked_today) {
+                            document.getElementById('button-message').textContent = "Well done. Come back tomorrow.";
+                        } else {
+                            document.getElementById('button-message').textContent = "";
+                        }
                     });
             }
         };

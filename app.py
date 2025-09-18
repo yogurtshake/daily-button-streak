@@ -32,7 +32,12 @@ def get_streak():
     users = read_users()
     user = users.get(username)
     streak = user['streak'] if user else 0
-    return jsonify({'streak': streak})
+    clicked_today = False
+    if user:
+        last_date = user['last_date']
+        today = datetime.now().date().strftime('%Y-%m-%d')
+        clicked_today = (last_date == today)
+    return jsonify({'streak': streak, 'clicked_today': clicked_today})
 
 @app.route('/click', methods=['POST'])
 def click():
