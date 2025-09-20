@@ -14,7 +14,7 @@ document.addEventListener('DOMContentLoaded', function() {
                 if (data.clicked_today) {
                     document.getElementById('button-message').textContent = "Well done. Come back tomorrow.";
                 } else {
-                    document.getElementById('button-message').textContent = "";
+                    document.getElementById('button-message').textContent = "You have not clicked today. Please click.";
                 }
             });
 
@@ -45,7 +45,7 @@ document.addEventListener('DOMContentLoaded', function() {
                         if (data.clicked_today) {
                             document.getElementById('button-message').textContent = "Well done. Come back tomorrow.";
                         } else {
-                            document.getElementById('button-message').textContent = "";
+                            document.getElementById('button-message').textContent = "You have not clicked today. Please click.";
                         }
                     });
             }
