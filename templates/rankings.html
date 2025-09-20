@@ -8,8 +8,8 @@
 </head>
 <body>
     <nav>
-        <a href="{{ url_for('index') }}">Home</a>
-        <a href="{{ url_for('rankings') }}">Rankings</a>
+        <a href="{{ url_for('index') }}" {% if request.endpoint == 'index' %}class="active"{% endif %}>Button</a>
+        <a href="{{ url_for('rankings') }}" {% if request.endpoint == 'rankings' %}class="active"{% endif %}>Rankings</a>
     </nav>
     
     <table class="rankings-table">

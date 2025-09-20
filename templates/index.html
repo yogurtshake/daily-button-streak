@@ -8,8 +8,8 @@
 </head>
 <body>
     <nav>
-        <a href="{{ url_for('index') }}">Home</a>
-        <a href="{{ url_for('rankings') }}">Rankings</a>
+        <a href="{{ url_for('index') }}" {% if request.endpoint == 'index' %}class="active"{% endif %}>Button</a>
+        <a href="{{ url_for('rankings') }}" {% if request.endpoint == 'rankings' %}class="active"{% endif %}>Rankings</a>
     </nav>
     
     <div class="main">
@@ -21,6 +21,7 @@
                     <input type="text" id="username-input" placeholder="Username" autofocus>
                     <button type="submit" id="login-btn">Enter</button>
                 </form>
+                Hello
             </div>
 
             <div id="main-content">
@@ -30,10 +31,12 @@
                     <button type="submit" class="small-button">Change</button>
                 </form>
 
-                <p>Welcome, <span id="username-display"></span></p>
-                <p>Streak: <span id="streak-count">0</span> days</p>
+                <p>Hello, <span id="username-display" style="font-weight: bold;"></span>! Nice name (it sucks)</p>
+                <p>Streak: <span id="streak-count" style="font-weight: bold;">0</span> days</p>
+
+                <button id="streak-btn">click</button>
+
                 <p>Time left today: <span id="timer"></span></p>
-                <button id="streak-btn">Button</button>
                 <p id="button-message"></p>
             </div>
         </div>

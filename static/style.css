@@ -38,6 +38,10 @@ nav a:hover {
   color: #fff;
 }
 
+nav a.active {
+  display: none;
+}
+
 form {
   display: flex;
   flex-direction: row;
@@ -60,22 +64,33 @@ input {
   max-width: 300px;
 }
 
-button[type="submit"], button[type="button"], #streak-btn {
+#streak-btn {
+  width: 240px;
+  height: 240px;
+  border-radius: 50%;
+  font-size: 2.3rem;
+  font-weight: bold; /* Add this line */
   background-color: rgb(255, 145, 0);
   color: white;
-  border: none;
-  border-radius: 6px;
-  padding: 0.7rem 1.5rem;
-  font-size: 1rem;
+  border: 5px solid #000;
   cursor: pointer;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  margin-top: 1.5rem;
   transition: background-color 0.3s;
-  margin-top: 0.5rem;
+  text-align: center;
+  white-space: normal;
+  padding: 0;
 }
 
-button[type="submit"]:hover,
-button[type="button"]:hover,
 #streak-btn:hover {
   background-color: rgb(110, 77, 27);
+}
+
+#streak-btn:active {
+  transform: scale(0.92);
+  box-shadow: 0 2px 8px rgba(0,0,0,0.12) inset;
 }
 
 #button-message {
@@ -232,7 +247,7 @@ tr:hover {
   align-items: flex-start;
   height: auto;
   margin: 0;
-  padding-top: 4rem; 
+  padding-top: 1rem; 
   min-height: 100vh;
 }
 

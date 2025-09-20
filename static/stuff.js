@@ -67,6 +67,7 @@ document.addEventListener('DOMContentLoaded', function() {
     }
 });
 
+
 function updateTimer() {
     const now = new Date();
     const options = { timeZone: "America/New_York", hour12: false };
