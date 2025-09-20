@@ -1,2 +1,3 @@
--add note about bounty somewhere
--adjust fonts/colours for text on main page
+-add note about bounty somewhere (info popup)
+-add info popup to main page
+-add bounty info to login page
