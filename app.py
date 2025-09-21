@@ -92,4 +92,4 @@ def daily_streak_reset():
 
 if __name__ == '__main__':
     threading.Thread(target=daily_streak_reset, daemon=True).start()
-    app.run(debug=True)
+    app.run(debug=True, port=5002)
