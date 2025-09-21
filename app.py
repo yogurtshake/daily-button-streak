@@ -1,9 +1,13 @@
 from flask import Flask, request, jsonify, render_template
 from datetime import datetime, timedelta
 import os
-from zoneinfo import ZoneInfo
 import time
 import threading
+try:
+    from zoneinfo import ZoneInfo
+except ImportError:
+    from backports.zoneinfo import ZoneInfo
+
 
 app = Flask(__name__)
 
