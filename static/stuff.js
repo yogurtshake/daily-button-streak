@@ -15,8 +15,10 @@ document.addEventListener('DOMContentLoaded', function() {
                 document.getElementById('streak-count').textContent = data.streak;
                 if (data.clicked_today) {
                     document.getElementById('button-message').textContent = "Well done. Come back tomorrow.";
+                    document.getElementById('button-message').style.color = "#ff9800";
                 } else {
                     document.getElementById('button-message').textContent = "You have not clicked today. Please click.";
+                    document.getElementById('button-message').style.color = "#ff0000";
                 }
             });
 
@@ -30,6 +32,7 @@ document.addEventListener('DOMContentLoaded', function() {
             .then(data => {
                 document.getElementById('streak-count').textContent = data.streak;
                 document.getElementById('button-message').textContent = "Well done. Come back tomorrow.";
+                document.getElementById('button-message').style.color = "#ff9800";
             });
         };
 
@@ -46,8 +49,10 @@ document.addEventListener('DOMContentLoaded', function() {
                         document.getElementById('streak-count').textContent = data.streak;
                         if (data.clicked_today) {
                             document.getElementById('button-message').textContent = "Well done. Come back tomorrow.";
+                            document.getElementById('button-message').style.color = "#ff9800";
                         } else {
                             document.getElementById('button-message').textContent = "You have not clicked today. Please click.";
+                            document.getElementById('button-message').style.color = "#ff0000";
                         }
                     });
             }
@@ -76,14 +81,19 @@ document.addEventListener('DOMContentLoaded', function() {
     document.getElementById('nav-main').onclick = function(e) {
         e.preventDefault();
         showMain();
+        document.getElementById('nav-main').classList.add('hidden');
+        document.getElementById('nav-rankings').classList.remove('hidden');
     };
     document.getElementById('nav-rankings').onclick = function(e) {
         e.preventDefault();
         showRankings();
+        document.getElementById('nav-main').classList.remove('hidden');
+        document.getElementById('nav-rankings').classList.add('hidden');
     };
 
     if (username) {
         showMain();
+        document.getElementById('nav-rankings').classList.remove('hidden');
     } else {
         document.getElementById('login-real-form').onsubmit = function(e) {
             e.preventDefault();
@@ -93,6 +103,8 @@ document.addEventListener('DOMContentLoaded', function() {
                 localStorage.setItem('username', username);
                 showMain();
             }
+
+            document.getElementById('nav-rankings').classList.remove('hidden');
         };
     }
 

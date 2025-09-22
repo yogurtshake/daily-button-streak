@@ -8,20 +8,21 @@
 </head>
 <body>
     <nav>
-        <a href="#" id="nav-main" class="nav-link">Button</a>
-        <a href="#" id="nav-rankings" class="nav-link">Rankings</a>
-        <button id="info-btn" class="info-btn" title="Info">i</button>
+        <a href="#" id="nav-main" class="nav-link hidden">Button</a>
+        <a href="#" id="nav-rankings" class="nav-link hidden">Rankings</a>
+        <button id="info-btn" class="info-btn" title="Info">info</button>
     </nav>
-        
     
     <div id="info-popup" class="info-popup">
         <div class="info-popup-content">
             <span id="close-info-popup" class="close-popup">&times;</span>
-            <h3>About Daily Button Streak</h3>
+            <h3>About this stupid app</h3>
             <p>
-            Click the button once per day to keep your streak going!<br>
-            Your streak resets if you miss a day.<br>
-            Rankings show the top streaks.
+                Enter a username and then click the button once per day to maintain a streak.<br><br>
+                You get the satisfaction of a daily streak like Duolingo but you don't have to do any of the meaningless work.<br><br>
+                Streak resets if you miss a day. <br>No reminders. No streak freeze bullshit. Just raw dedication.<br><br>
+                I will give $50 to the first person to beat my record streak. 
+                In other words, I have to lose my streak and then you have to surpass whatever number I was at. Good luck.
             </p>
         </div>
     </div>
@@ -35,7 +36,7 @@
                     <input type="text" id="username-input" placeholder="Username" autofocus>
                     <button type="submit" id="login-btn">Enter</button>
                 </form>
-                Hello
+                <p><b>NOTE:</b> I'm putting a $50 bounty on beating my streak. <br><br>Click the "info" button for more info.</p>
             </div>
 
             <div id="main-content">
@@ -47,6 +48,7 @@
 
                 <p>Hello, <span id="username-display" style="font-weight: bold;"></span>!</p>
                 <p>Streak: <span id="streak-count" style="font-weight: bold;">0</span> days</p>
+                <p>$50 Bounty: <b>Active</b></p>
 
                 <button id="streak-btn">click</button>
 
