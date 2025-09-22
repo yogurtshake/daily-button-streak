@@ -10,7 +10,8 @@ except ImportError:
 
 app = Flask(__name__, static_url_path='/daily-button-streak/static')
 
-DB_FILE = 'database.txt'
+BASE_DIR = os.path.dirname(os.path.abspath(__file__))
+DB_FILE = os.path.join(BASE_DIR, 'database.txt')
 
 def read_users():
     users = {}
