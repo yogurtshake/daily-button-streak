@@ -8,7 +8,7 @@ try:
 except ImportError:
     from backports.zoneinfo import ZoneInfo
 
-app = Flask(__name__)
+app = Flask(__name__, static_url_path='/daily-button-streak/static')
 
 DB_FILE = 'database.txt'
 
