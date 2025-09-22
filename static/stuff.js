@@ -1,4 +1,4 @@
-const BASE_PATH = window.location.pathname.startsWith('/daily-button-streak') ? '/daily-button-streak' : '';
+const BASE_PATH = window.location.pathname.split('/')[1] === 'daily-button-streak' ? '/daily-button-streak' : '';
 let username = localStorage.getItem('username');
 
 document.addEventListener('DOMContentLoaded', function() {
