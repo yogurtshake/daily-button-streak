@@ -1,3 +1,4 @@
+const BASE_PATH = window.location.pathname.startsWith('/daily-button-streak') ? '/daily-button-streak' : '';
 let username = localStorage.getItem('username');
 
 document.addEventListener('DOMContentLoaded', function() {
@@ -7,7 +8,7 @@ document.addEventListener('DOMContentLoaded', function() {
         document.getElementById('username-display').textContent = username;
         document.getElementById('main-username-input').value = username;
 
-        fetch(`/streak?username=${encodeURIComponent(username)}`)
+        fetch(`${BASE_PATH}/streak?username=${encodeURIComponent(username)}`)
             .then(res => res.json())
             .then(data => {
                 document.getElementById('streak-count').textContent = data.streak;
@@ -19,7 +20,7 @@ document.addEventListener('DOMContentLoaded', function() {
             });
 
         document.getElementById('streak-btn').onclick = function() {
-            fetch('/click', {
+            fetch(`${BASE_PATH}/click`, {
                 method: 'POST',
                 headers: {'Content-Type': 'application/json'},
                 body: JSON.stringify({username})
@@ -38,7 +39,7 @@ document.addEventListener('DOMContentLoaded', function() {
                 localStorage.setItem('username', newUsername);
                 username = newUsername;
                 document.getElementById('username-display').textContent = username;
-                fetch(`/streak?username=${encodeURIComponent(username)}`)
+                fetch(`${BASE_PATH}/streak?username=${encodeURIComponent(username)}`)
                     .then(res => res.json())
                     .then(data => {
                         document.getElementById('streak-count').textContent = data.streak;
