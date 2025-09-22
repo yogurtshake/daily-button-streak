@@ -24,7 +24,7 @@ def write_users(users):
         for username, data in users.items():
             f.write(f"{username},{data['streak']},{data['last_date']}\n")
 
-def reset_streaks_once():
+def reset_streaks():
     users = read_users()
     today = datetime.now(ZoneInfo("America/New_York")).date()
     yesterday = today - timedelta(days=1)
@@ -37,4 +37,4 @@ def reset_streaks_once():
     write_users(users)
 
 if __name__ == '__main__':
-    reset_streaks_once()
+    reset_streaks()
