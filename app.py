@@ -1,8 +1,6 @@
 from flask import Flask, request, jsonify, render_template
 from datetime import datetime, timedelta
 import os
-import time
-import threading
 try:
     from zoneinfo import ZoneInfo
 except ImportError:
@@ -79,25 +77,5 @@ def rankings():
     sorted_users = sorted(users.items(), key=lambda x: (-x[1]['streak'], x[0]))
     return render_template('rankings.html', rankings=sorted_users)
 
-def daily_streak_reset():
-    while True:
-        users = read_users()
-        today = datetime.now(ZoneInfo("America/New_York")).date()
-        yesterday = today - timedelta(days=1)
-        
-        for username, data in users.items():
-            last_date = datetime.strptime(data['last_date'], '%Y-%m-%d').date()
-            if last_date != yesterday and last_date != today:
-                users[username]['streak'] = 0
-                
-        write_users(users)
-        
-        now = datetime.now(ZoneInfo("America/New_York"))
-        next_midnight = (now + timedelta(days=1)).replace(hour=0, minute=0, second=0, microsecond=0)
-        seconds_until_midnight = (next_midnight - now).total_seconds()
-        
-        time.sleep(seconds_until_midnight)
-
 if __name__ == '__main__':
-    threading.Thread(target=daily_streak_reset, daemon=True).start()
     app.run(debug=True, port=5002)
