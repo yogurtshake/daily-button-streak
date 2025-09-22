@@ -3,16 +3,18 @@ from datetime import datetime, timedelta
 import os
 import time
 import threading
+from werkzeug.middleware.dispatcher import DispatcherMiddleware
+from werkzeug.serving import run_simple
 try:
     from zoneinfo import ZoneInfo
 except ImportError:
     from backports.zoneinfo import ZoneInfo
 
-app = Flask(
-    __name__,
-    static_url_path='/daily-button-streak/static',
-    static_folder='static'
-)
+real_app = Flask(__name__)
+
+app = DispatcherMiddleware(Flask('dummy'), {
+    '/daily-button-streak': real_app
+})
 
 DB_FILE = 'database.txt'
 
