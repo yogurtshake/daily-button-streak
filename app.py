@@ -3,18 +3,12 @@ from datetime import datetime, timedelta
 import os
 import time
 import threading
-from werkzeug.middleware.dispatcher import DispatcherMiddleware
-from werkzeug.serving import run_simple
 try:
     from zoneinfo import ZoneInfo
 except ImportError:
     from backports.zoneinfo import ZoneInfo
 
-real_app = Flask(__name__)
-
-app = DispatcherMiddleware(Flask('dummy'), {
-    '/daily-button-streak': real_app
-})
+app = Flask(__name__)
 
 DB_FILE = 'database.txt'
 
@@ -35,10 +29,12 @@ def write_users(users):
             f.write(f"{username},{data['streak']},{data['last_date']}\n")
 
 @app.route('/')
+@app.route('/daily-button-streak')
 def index():
     return render_template('index.html')
 
 @app.route('/streak')
+@app.route('/daily-button-streak/streak')
 def get_streak():
     username = request.args.get('username')
     users = read_users()
@@ -52,6 +48,7 @@ def get_streak():
     return jsonify({'streak': streak, 'clicked_today': clicked_today})
 
 @app.route('/click', methods=['POST'])
+@app.route('/daily-button-streak/click', methods=['POST'])
 def click():
     data = request.get_json()
     username = data.get('username')
@@ -75,6 +72,7 @@ def click():
     return jsonify({'streak': streak})
 
 @app.route('/rankings')
+@app.route('/daily-button-streak/rankings')
 def rankings():
     users = read_users()
     sorted_users = sorted(users.items(), key=lambda x: (-x[1]['streak'], x[0]))
