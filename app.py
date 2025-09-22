@@ -80,12 +80,6 @@ def rankings():
 
 def daily_streak_reset():
     while True:
-        now = datetime.now(ZoneInfo("America/New_York"))
-        next_midnight = (now + timedelta(days=1)).replace(hour=0, minute=0, second=0, microsecond=0)
-        seconds_until_midnight = (next_midnight - now).total_seconds()
-        
-        time.sleep(seconds_until_midnight)
-        
         users = read_users()
         today = datetime.now(ZoneInfo("America/New_York")).date()
         yesterday = today - timedelta(days=1)
@@ -96,6 +90,12 @@ def daily_streak_reset():
                 users[username]['streak'] = 0
                 
         write_users(users)
+        
+        now = datetime.now(ZoneInfo("America/New_York"))
+        next_midnight = (now + timedelta(days=1)).replace(hour=0, minute=0, second=0, microsecond=0)
+        seconds_until_midnight = (next_midnight - now).total_seconds()
+        
+        time.sleep(seconds_until_midnight)
 
 if __name__ == '__main__':
     threading.Thread(target=daily_streak_reset, daemon=True).start()
