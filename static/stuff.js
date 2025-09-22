@@ -5,6 +5,7 @@ document.addEventListener('DOMContentLoaded', function() {
     function showMain() {
         document.getElementById('login-form').style.display = 'none';
         document.getElementById('main-content').style.display = 'block';
+        document.getElementById('rankings-section').style.display = 'none';
         document.getElementById('username-display').textContent = username;
         document.getElementById('main-username-input').value = username;
 
@@ -53,6 +54,34 @@ document.addEventListener('DOMContentLoaded', function() {
         };
     }
 
+    function showRankings() {
+        document.getElementById('main-content').style.display = 'none';
+        document.getElementById('login-form').style.display = 'none';
+        document.getElementById('rankings-section').style.display = 'block';
+
+        fetch(`${BASE_PATH}/rankings-data`)
+            .then(res => res.json())
+            .then(data => {
+                const table = document.querySelector('.rankings-table');
+                table.querySelectorAll('tr:not(:first-child)').forEach(tr => tr.remove());
+
+                data.rankings.forEach((row, idx) => {
+                    const tr = document.createElement('tr');
+                    tr.innerHTML = `<td>${idx+1}</td><td>${row[0]}</td><td>${row[1].streak}</td>`;
+                    table.appendChild(tr);
+                });
+            });
+    }
+
+    document.getElementById('nav-main').onclick = function(e) {
+        e.preventDefault();
+        showMain();
+    };
+    document.getElementById('nav-rankings').onclick = function(e) {
+        e.preventDefault();
+        showRankings();
+    };
+
     if (username) {
         showMain();
     } else {
@@ -66,8 +95,17 @@ document.addEventListener('DOMContentLoaded', function() {
             }
         };
     }
-});
 
+    document.getElementById('info-btn').onclick = function() {
+        document.getElementById('info-popup').style.display = 'flex';
+    };
+    document.getElementById('close-info-popup').onclick = function() {
+        document.getElementById('info-popup').style.display = 'none';
+    };
+    document.getElementById('info-popup').onclick = function(e) {
+        if (e.target === this) this.style.display = 'none';
+    };
+});
 
 function updateTimer() {
     const now = new Date();

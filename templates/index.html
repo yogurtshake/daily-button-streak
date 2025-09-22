@@ -8,10 +8,24 @@
 </head>
 <body>
     <nav>
-        <a href="{{ url_for('index') }}" {% if request.endpoint == 'index' %}class="active"{% endif %}>Button</a>
-        <a href="{{ url_for('rankings') }}" {% if request.endpoint == 'rankings' %}class="active"{% endif %}>Rankings</a>
+        <a href="#" id="nav-main" class="nav-link">Button</a>
+        <a href="#" id="nav-rankings" class="nav-link">Rankings</a>
+        <button id="info-btn" class="info-btn" title="Info">i</button>
     </nav>
+        
     
+    <div id="info-popup" class="info-popup">
+        <div class="info-popup-content">
+            <span id="close-info-popup" class="close-popup">&times;</span>
+            <h3>About Daily Button Streak</h3>
+            <p>
+            Click the button once per day to keep your streak going!<br>
+            Your streak resets if you miss a day.<br>
+            Rankings show the top streaks.
+            </p>
+        </div>
+    </div>
+
     <div class="main">
         <div class="container">
 
@@ -39,8 +53,21 @@
                 <p>Time left today: <span id="timer"></span></p>
                 <p id="button-message"></p>
             </div>
+
+            <div id="rankings-section" style="display:none">
+                <h2>Rankings</h2>
+                <table class="rankings-table">
+                    <tr>
+                        <th>Rank</th>
+                        <th>Username</th>
+                        <th>Streak</th>
+                    </tr>
+                </table>
+            </div>
+
         </div>
     </div>
+
     <script src="{{ url_for('static', filename='stuff.js') }}"></script>
 </body>
 </html>

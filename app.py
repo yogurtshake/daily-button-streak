@@ -70,12 +70,12 @@ def click():
     write_users(users)
     return jsonify({'streak': streak})
 
-@app.route('/rankings')
-@app.route('/daily-button-streak/rankings')
-def rankings():
+@app.route('/rankings-data')
+@app.route('/daily-button-streak/rankings-data')
+def rankings_data():
     users = read_users()
     sorted_users = sorted(users.items(), key=lambda x: (-x[1]['streak'], x[0]))
-    return render_template('rankings.html', rankings=sorted_users)
+    return jsonify(rankings=sorted_users)
 
 if __name__ == '__main__':
     app.run(debug=True, port=5002)
