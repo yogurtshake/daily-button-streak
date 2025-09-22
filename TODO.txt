@@ -1,3 +1,1 @@
--add note about bounty somewhere (info popup)
--add info popup to main page
--add bounty info to login page
+-update mobile view
