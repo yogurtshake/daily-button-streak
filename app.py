@@ -74,7 +74,8 @@ def click():
 @app.route('/daily-button-streak/rankings-data')
 def rankings_data():
     users = read_users()
-    sorted_users = sorted(users.items(), key=lambda x: (-x[1]['streak'], x[0]))
+    filtered_users = {u: d for u, d in users.items() if d['streak'] > 0}
+    sorted_users = sorted(filtered_users.items(), key=lambda x: (-x[1]['streak'], x[0]))
     return jsonify(rankings=sorted_users)
 
 if __name__ == '__main__':
