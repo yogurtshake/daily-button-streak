@@ -1,7 +1,7 @@
 {
   "name": "daily button streak",
   "short_name": "dbs",
-  "start_url": "/",
+  "start_url": "/daily-button-streak/",
   "display": "standalone",
   "background_color": "#000000",
   "theme_color": "#ff9100",
