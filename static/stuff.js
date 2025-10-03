@@ -121,25 +121,12 @@ document.addEventListener('DOMContentLoaded', function() {
 
 function updateTimer() {
     const now = new Date();
-    const options = { timeZone: "America/New_York", hour12: false };
-    const parts = new Intl.DateTimeFormat('en-US', {
-        ...options,
-        year: 'numeric', month: '2-digit', day: '2-digit',
-        hour: '2-digit', minute: '2-digit', second: '2-digit'
-    }).formatToParts(now);
-
-    const getPart = (type) => parts.find(p => p.type === type).value;
-    const year = getPart('year');
-    const month = getPart('month');
-    const day = getPart('day');
-    const hour = getPart('hour');
-    const minute = getPart('minute');
-    const second = getPart('second');
-
-    const estNow = new Date(`${year}-${month}-${day}T${hour}:${minute}:${second}-05:00`);
+    const estString = now.toLocaleString("en-US", { timeZone: "America/New_York" });
+    const estNow = new Date(estString);
 
     const estMidnight = new Date(estNow);
-    estMidnight.setHours(24, 0, 0, 0);
+    estMidnight.setHours(0, 0, 0, 0);
+    estMidnight.setDate(estMidnight.getDate() + 1);
 
     const diff = estMidnight - estNow;
 
@@ -147,6 +134,7 @@ function updateTimer() {
         const hours = Math.floor(diff / (1000 * 60 * 60));
         const minutes = Math.floor((diff / (1000 * 60)) % 60);
         const seconds = Math.floor((diff / 1000) % 60);
+        
         document.getElementById('timer').textContent =
             `${hours.toString().padStart(2, '0')}:` +
             `${minutes.toString().padStart(2, '0')}:` +
