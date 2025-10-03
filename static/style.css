@@ -340,3 +340,10 @@ tr:hover {
 .hidden {
   display: none !important;
 }
+
+@media (prefers-color-scheme: dark) {
+  body {
+    background: linear-gradient(to right, #e0f7fa, #ffffff) !important;
+    color: #333 !important;
+  }
+}
