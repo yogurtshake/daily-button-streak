@@ -1,4 +1,4 @@
-from flask import Flask, request, jsonify, render_template
+from flask import Flask, request, jsonify, render_template, Response
 from datetime import datetime, timedelta
 import os
 try:
@@ -26,6 +26,15 @@ def write_users(users):
     with open(DB_FILE, 'w') as f:
         for username, data in users.items():
             f.write(f"{username},{data['streak']},{data['last_date']}\n")
+
+
+@app.route('/daily-button-streak/static/manifest.json')
+@app.route('/static/manifest.json')
+def manifest():
+    manifest_path = os.path.join(BASE_DIR, 'static', 'manifest.json')
+    with open(manifest_path, 'r', encoding='utf-8') as f:
+        manifest_content = f.read()
+    return Response(manifest_content, mimetype='application/json')
 
 @app.route('/')
 @app.route('/daily-button-streak')
