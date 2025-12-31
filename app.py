@@ -85,7 +85,17 @@ def rankings_data():
     users = read_users()
     filtered_users = {u: d for u, d in users.items() if d['streak'] > 0}
     sorted_users = sorted(filtered_users.items(), key=lambda x: (-x[1]['streak'], x[0]))
-    return jsonify(rankings=sorted_users)
+    
+    today = datetime.now().date().strftime('%Y-%m-%d')
+    rankings = []
+    for username, data in sorted_users:
+        clicked_today = "yes" if data['last_date'] == today else "no"
+        rankings.append((username, {
+            'streak': data['streak'],
+            'clicked_today': clicked_today
+        }))
+        
+    return jsonify(rankings=rankings)
 
 if __name__ == '__main__':
     app.run(debug=True, port=5002)

@@ -72,7 +72,7 @@ document.addEventListener('DOMContentLoaded', function() {
 
                 data.rankings.forEach((row, idx) => {
                     const tr = document.createElement('tr');
-                    tr.innerHTML = `<td>${idx+1}</td><td>${row[0]}</td><td>${row[1].streak}</td>`;
+                    tr.innerHTML = `<td>${idx+1}</td><td>${row[0]}</td><td>${row[1].streak}</td><td>${row[1].clicked_today}</td>`;
                     table.appendChild(tr);
                 });
             });
