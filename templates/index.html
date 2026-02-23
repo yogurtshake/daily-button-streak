@@ -50,16 +50,19 @@
 
                 <p>Hello, <span id="username-display" style="font-weight: bold;"></span>!</p>
                 <p>Streak: <span id="streak-count" style="font-weight: bold;">0</span> days</p>
-                <p>$50 Bounty: <b>Active</b></p>
-
+                
                 <button id="streak-btn">click</button>
-
+                
                 <p>Time left today: <span id="timer"></span></p>
                 <p id="button-message"></p>
             </div>
 
             <div id="rankings-section" style="display:none">
                 <h2>Rankings</h2>
+                <div id="record-streak-note">
+                    <p>$50 Bounty: <b>Active</b></p>
+                    <p>Streak to beat: <span id="highest-streak-count" style="font-weight: bold;">loading...</span> days</p>
+                </div>
                 <table class="rankings-table">
                     <tr>
                         <th>Rank</th>

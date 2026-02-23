@@ -17,15 +17,26 @@ def read_users():
         with open(DB_FILE, 'r') as f:
             for line in f:
                 parts = line.strip().split(',')
-                if len(parts) == 3:
+                if len(parts) == 4:
+                    username, streak, last_date, highest_streak = parts
+                    users[username] = {
+                        'streak': int(streak),
+                        'last_date': last_date,
+                        'highest_streak': int(highest_streak)
+                    }
+                elif len(parts) == 3:
                     username, streak, last_date = parts
-                    users[username] = {'streak': int(streak), 'last_date': last_date}
+                    users[username] = {
+                        'streak': int(streak),
+                        'last_date': last_date,
+                        'highest_streak': int(streak)
+                    }
     return users
 
 def write_users(users):
     with open(DB_FILE, 'w') as f:
         for username, data in users.items():
-            f.write(f"{username},{data['streak']},{data['last_date']}\n")
+            f.write(f"{username},{data['streak']},{data['last_date']},{data['highest_streak']}\n")
 
 
 @app.route('/daily-button-streak/static/manifest.json')
@@ -72,12 +83,18 @@ def click():
             streak = user['streak'] + 1
         else:
             streak = 1
+        highest_streak = max(streak, user.get('highest_streak', streak))
     else:
         streak = 1
+        highest_streak = 1
 
-    users[username] = {'streak': streak, 'last_date': today.strftime('%Y-%m-%d')}
+    users[username] = {
+        'streak': streak,
+        'last_date': today.strftime('%Y-%m-%d'),
+        'highest_streak': highest_streak
+    }
     write_users(users)
-    return jsonify({'streak': streak})
+    return jsonify({'streak': streak, 'highest_streak': highest_streak})
 
 @app.route('/rankings-data')
 @app.route('/daily-button-streak/rankings-data')
@@ -92,7 +109,8 @@ def rankings_data():
         clicked_today = "yes" if data['last_date'] == today else "no"
         rankings.append((username, {
             'streak': data['streak'],
-            'clicked_today': clicked_today
+            'clicked_today': clicked_today,
+            'highest_streak': data.get('highest_streak', data['streak'])
         }))
         
     return jsonify(rankings=rankings)

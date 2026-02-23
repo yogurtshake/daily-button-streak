@@ -70,6 +70,18 @@ document.addEventListener('DOMContentLoaded', function() {
                 const table = document.querySelector('.rankings-table');
                 table.querySelectorAll('tr:not(:first-child)').forEach(tr => tr.remove());
 
+                let recordStreak = 0;
+                data.rankings.forEach(row => {
+                    if (row[1].highest_streak > recordStreak) {
+                        recordStreak = row[1].highest_streak;
+                    }
+                });
+
+                const recordStreakElem = document.getElementById('highest-streak-count');
+                if (recordStreakElem) {
+                    recordStreakElem.textContent = recordStreak;
+                }
+
                 data.rankings.forEach((row, idx) => {
                     const tr = document.createElement('tr');
                     tr.innerHTML = `<td>${idx+1}</td><td>${row[0]}</td><td>${row[1].streak}</td><td>${row[1].clicked_today}</td>`;
