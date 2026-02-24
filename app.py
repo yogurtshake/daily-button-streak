@@ -24,13 +24,6 @@ def read_users():
                         'last_date': last_date,
                         'highest_streak': int(highest_streak)
                     }
-                elif len(parts) == 3:
-                    username, streak, last_date = parts
-                    users[username] = {
-                        'streak': int(streak),
-                        'last_date': last_date,
-                        'highest_streak': int(streak)
-                    }
     return users
 
 def write_users(users):
