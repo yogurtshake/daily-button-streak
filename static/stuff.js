@@ -1,95 +1,95 @@
 const BASE_PATH = window.location.pathname.split('/')[1] === 'daily-button-streak' ? '/daily-button-streak' : '';
 let username = localStorage.getItem('username');
 
-document.addEventListener('DOMContentLoaded', function() {
-    function showMain() {
-        document.getElementById('login-form').style.display = 'none';
-        document.getElementById('main-content').style.display = 'block';
-        document.getElementById('rankings-section').style.display = 'none';
-        document.getElementById('username-display').textContent = username;
-        document.getElementById('main-username-input').value = username;
+function showMain() {
+    document.getElementById('login-form').style.display = 'none';
+    document.getElementById('main-content').style.display = 'block';
+    document.getElementById('rankings-section').style.display = 'none';
+    document.getElementById('username-display').textContent = username;
+    document.getElementById('main-username-input').value = username;
 
-        fetch(`${BASE_PATH}/streak?username=${encodeURIComponent(username)}`)
-            .then(res => res.json())
-            .then(data => {
-                document.getElementById('streak-count').textContent = data.streak;
-                if (data.clicked_today) {
-                    document.getElementById('button-message').textContent = "Well done. Come back tomorrow.";
-                    document.getElementById('button-message').style.color = "#ff9800";
-                } else {
-                    document.getElementById('button-message').textContent = "You have not clicked today. Please click.";
-                    document.getElementById('button-message').style.color = "#ff0000";
-                }
-            });
-
-        document.getElementById('streak-btn').onclick = function() {
-            fetch(`${BASE_PATH}/click`, {
-                method: 'POST',
-                headers: {'Content-Type': 'application/json'},
-                body: JSON.stringify({username})
-            })
-            .then(res => res.json())
-            .then(data => {
-                document.getElementById('streak-count').textContent = data.streak;
+    fetch(`${BASE_PATH}/streak?username=${encodeURIComponent(username)}`)
+        .then(res => res.json())
+        .then(data => {
+            document.getElementById('streak-count').textContent = data.streak;
+            if (data.clicked_today) {
                 document.getElementById('button-message').textContent = "Well done. Come back tomorrow.";
                 document.getElementById('button-message').style.color = "#ff9800";
-            });
-        };
-
-        document.getElementById('change-username-form').onsubmit = function(e) {
-            e.preventDefault();
-            const newUsername = document.getElementById('main-username-input').value.trim();
-            if (newUsername && newUsername !== username) {
-                localStorage.setItem('username', newUsername);
-                username = newUsername;
-                document.getElementById('username-display').textContent = username;
-                fetch(`${BASE_PATH}/streak?username=${encodeURIComponent(username)}`)
-                    .then(res => res.json())
-                    .then(data => {
-                        document.getElementById('streak-count').textContent = data.streak;
-                        if (data.clicked_today) {
-                            document.getElementById('button-message').textContent = "Well done. Come back tomorrow.";
-                            document.getElementById('button-message').style.color = "#ff9800";
-                        } else {
-                            document.getElementById('button-message').textContent = "You have not clicked today. Please click.";
-                            document.getElementById('button-message').style.color = "#ff0000";
-                        }
-                    });
+            } else {
+                document.getElementById('button-message').textContent = "You have not clicked today. Please click.";
+                document.getElementById('button-message').style.color = "#ff0000";
             }
-        };
-    }
+        });
 
-    function showRankings() {
-        document.getElementById('main-content').style.display = 'none';
-        document.getElementById('login-form').style.display = 'none';
-        document.getElementById('rankings-section').style.display = 'block';
+    document.getElementById('streak-btn').onclick = function() {
+        fetch(`${BASE_PATH}/click`, {
+            method: 'POST',
+            headers: {'Content-Type': 'application/json'},
+            body: JSON.stringify({username})
+        })
+        .then(res => res.json())
+        .then(data => {
+            document.getElementById('streak-count').textContent = data.streak;
+            document.getElementById('button-message').textContent = "Well done. Come back tomorrow.";
+            document.getElementById('button-message').style.color = "#ff9800";
+        });
+    };
 
-        fetch(`${BASE_PATH}/rankings-data`)
-            .then(res => res.json())
-            .then(data => {
-                const table = document.querySelector('.rankings-table');
-                table.querySelectorAll('tr:not(:first-child)').forEach(tr => tr.remove());
-
-                let recordStreak = 0;
-                data.rankings.forEach(row => {
-                    if (row[1].highest_streak > recordStreak) {
-                        recordStreak = row[1].highest_streak;
+    document.getElementById('change-username-form').onsubmit = function(e) {
+        e.preventDefault();
+        const newUsername = document.getElementById('main-username-input').value.trim();
+        if (newUsername && newUsername !== username) {
+            localStorage.setItem('username', newUsername);
+            username = newUsername;
+            document.getElementById('username-display').textContent = username;
+            fetch(`${BASE_PATH}/streak?username=${encodeURIComponent(username)}`)
+                .then(res => res.json())
+                .then(data => {
+                    document.getElementById('streak-count').textContent = data.streak;
+                    if (data.clicked_today) {
+                        document.getElementById('button-message').textContent = "Well done. Come back tomorrow.";
+                        document.getElementById('button-message').style.color = "#ff9800";
+                    } else {
+                        document.getElementById('button-message').textContent = "You have not clicked today. Please click.";
+                        document.getElementById('button-message').style.color = "#ff0000";
                     }
                 });
+        }
+    };
+}
 
-                const recordStreakElem = document.getElementById('highest-streak-count');
-                if (recordStreakElem) {
-                    recordStreakElem.textContent = recordStreak;
+function showRankings() {
+    document.getElementById('main-content').style.display = 'none';
+    document.getElementById('login-form').style.display = 'none';
+    document.getElementById('rankings-section').style.display = 'block';
+
+    fetch(`${BASE_PATH}/rankings-data`)
+        .then(res => res.json())
+        .then(data => {
+            const table = document.querySelector('.rankings-table');
+            table.querySelectorAll('tr:not(:first-child)').forEach(tr => tr.remove());
+
+            let recordStreak = 0;
+            data.rankings.forEach(row => {
+                if (row[1].highest_streak > recordStreak) {
+                    recordStreak = row[1].highest_streak;
                 }
-
-                data.rankings.forEach((row, idx) => {
-                    const tr = document.createElement('tr');
-                    tr.innerHTML = `<td>${idx+1}</td><td>${row[0]}</td><td>${row[1].streak}</td><td>${row[1].clicked_today}</td>`;
-                    table.appendChild(tr);
-                });
             });
-    }
 
+            const recordStreakElem = document.getElementById('highest-streak-count');
+            if (recordStreakElem) {
+                recordStreakElem.textContent = recordStreak;
+            }
+
+            data.rankings.forEach((row, idx) => {
+                const tr = document.createElement('tr');
+                tr.innerHTML = `<td>${idx+1}</td><td>${row[0]}</td><td>${row[1].streak}</td><td>${row[1].clicked_today}</td>`;
+                table.appendChild(tr);
+            });
+        });
+}
+
+document.addEventListener('DOMContentLoaded', function() {
     document.getElementById('nav-main').onclick = function(e) {
         e.preventDefault();
         showMain();
@@ -129,6 +129,16 @@ document.addEventListener('DOMContentLoaded', function() {
     document.getElementById('info-popup').onclick = function(e) {
         if (e.target === this) this.style.display = 'none';
     };
+});
+
+window.addEventListener('pageshow', function(event) {
+    if (username && event.persisted) {
+        if (document.getElementById('rankings-section').style.display === 'block') {
+            showRankings();
+        } else {
+            showMain();
+        }
+    }
 });
 
 function updateTimer() {
