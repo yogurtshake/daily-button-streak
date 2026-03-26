@@ -141,6 +141,16 @@ window.addEventListener('pageshow', function(event) {
     }
 });
 
+document.addEventListener('visibilitychange', function() {
+    if (document.visibilityState === 'visible' && username) {
+        if (document.getElementById('rankings-section').style.display === 'block') {
+            showRankings();
+        } else {
+            showMain();
+        }
+    }
+});
+
 function updateTimer() {
     const now = new Date();
     const estString = now.toLocaleString("en-US", { timeZone: "America/New_York" });
