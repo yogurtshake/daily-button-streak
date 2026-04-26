@@ -41,11 +41,13 @@ def manifest():
     return Response(manifest_content, mimetype='application/json')
 
 @app.route('/')
+@app.route('/dbs')
 @app.route('/daily-button-streak')
 def index():
     return render_template('index.html')
 
 @app.route('/streak')
+@app.route('/dbs/streak')
 @app.route('/daily-button-streak/streak')
 def get_streak():
     username = request.args.get('username')
@@ -60,6 +62,7 @@ def get_streak():
     return jsonify({'streak': streak, 'clicked_today': clicked_today})
 
 @app.route('/click', methods=['POST'])
+@app.route('/dbs/click', methods=['POST'])
 @app.route('/daily-button-streak/click', methods=['POST'])
 def click():
     data = request.get_json()
@@ -90,6 +93,7 @@ def click():
     return jsonify({'streak': streak, 'highest_streak': highest_streak})
 
 @app.route('/rankings-data')
+@app.route('/dbs/rankings-data')
 @app.route('/daily-button-streak/rankings-data')
 def rankings_data():
     users = read_users()
