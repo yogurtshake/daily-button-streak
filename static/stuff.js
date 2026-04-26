@@ -1,5 +1,5 @@
-const BASE_PATH = window.location.pathname.split('/')[1] === 'daily-button-streak' ? '/daily-button-streak' : '';
-let username = localStorage.getItem('username');
+const firstSegment = window.location.pathname.split('/')[1];
+const BASE_PATH = (firstSegment === 'daily-button-streak' || firstSegment === 'dbs') ? `/${firstSegment}` : '';let username = localStorage.getItem('username');
 
 function showMain() {
     document.getElementById('login-form').style.display = 'none';
