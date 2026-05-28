@@ -70,11 +70,11 @@ function showRankings() {
             table.querySelectorAll('tr:not(:first-child)').forEach(tr => tr.remove());
 
             let recordStreak = 0;
-            data.rankings.forEach(row => {
-                if (row[1].highest_streak > recordStreak) {
-                    recordStreak = row[1].highest_streak;
-                }
-            });
+            let username = "LSK" // hardcoding this in because i'm never changing my name
+            const userRow = data.rankings.find(row => row[0] === username);
+            if (userRow) {
+                recordStreak = userRow[1].highest_streak;
+            }
 
             const recordStreakElem = document.getElementById('highest-streak-count');
             if (recordStreakElem) {
