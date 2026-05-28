@@ -176,7 +176,7 @@ tr:hover {
 
 .rankings-table {
   width: 100%;
-  max-width: 420px;
+  max-width: 100%;
   margin: 2rem auto 0 auto;
   border-collapse: separate;
   border-spacing: 0;
