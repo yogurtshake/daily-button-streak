@@ -17,12 +17,13 @@ def read_users():
         with open(DB_FILE, 'r') as f:
             for line in f:
                 parts = line.strip().split(',')
-                if len(parts) == 5:
-                    username, streak, last_date, highest_streak, total_days_clicked = parts
+                if len(parts) == 6:
+                    username, streak, last_date, highest_streak, total_clicks, total_days_clicked = parts
                     users[username] = {
                         'streak': int(streak),
                         'last_date': last_date,
                         'highest_streak': int(highest_streak),
+                        'total_clicks': int(total_clicks),
                         'total_days_clicked': int(total_days_clicked)
                     }
     return users
@@ -30,7 +31,7 @@ def read_users():
 def write_users(users):
     with open(DB_FILE, 'w') as f:
         for username, data in users.items():
-            f.write(f"{username},{data['streak']},{data['last_date']},{data['highest_streak']},{data['total_days_clicked']}\n")
+            f.write(f"{username},{data['streak']},{data['last_date']},{data['highest_streak']},{data['total_clicks']},{data['total_days_clicked']}\n")
 
 
 @app.route('/daily-button-streak/static/manifest.json')
@@ -76,21 +77,26 @@ def click():
         last_date = datetime.strptime(user['last_date'], '%Y-%m-%d').date()
         if last_date == today:
             streak = user['streak']
+            total_days_clicked = user['total_days_clicked']
         elif last_date == today - timedelta(days=1):
             streak = user['streak'] + 1
+            total_days_clicked = user['total_days_clicked'] + 1
         else:
             streak = 1
+            total_days_clicked = user['total_days_clicked'] + 1
         highest_streak = max(streak, user.get('highest_streak', streak))
-        total_days_clicked = user['total_days_clicked'] + 1
+        total_clicks = user['total_clicks'] + 1
     else:
         streak = 1
         highest_streak = 1
+        total_clicks = 1
         total_days_clicked = 1
 
     users[username] = {
         'streak': streak,
         'last_date': today.strftime('%Y-%m-%d'),
         'highest_streak': highest_streak,
+        'total_clicks': total_clicks,
         'total_days_clicked': total_days_clicked
     }
     write_users(users)
