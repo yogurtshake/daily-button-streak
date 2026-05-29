@@ -86,7 +86,7 @@ function showRankings() {
                 tr.innerHTML = `<td>${idx+1}</td>
                     <td>${row[0]}</td>
                     <td>${row[1].streak}</td>
-                    <td>${row[1].clicked_today}</td>
+                    <td>${row[1].clicked_today}</td>`;
                 table.appendChild(tr);
             });
         });
