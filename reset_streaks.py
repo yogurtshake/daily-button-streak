@@ -14,19 +14,21 @@ def read_users():
         with open(DB_FILE, 'r') as f:
             for line in f:
                 parts = line.strip().split(',')
-                if len(parts) == 4:
-                    username, streak, last_date, highest_streak = parts
+                if len(parts) == 6:
+                    username, streak, last_date, highest_streak, total_clicks, total_days_clicked = parts
                     users[username] = {
                         'streak': int(streak),
                         'last_date': last_date,
-                        'highest_streak': int(highest_streak)
+                        'highest_streak': int(highest_streak),
+                        'total_clicks': int(total_clicks),
+                        'total_days_clicked': int(total_days_clicked)
                     }
     return users
 
 def write_users(users):
     with open(DB_FILE, 'w') as f:
         for username, data in users.items():
-            f.write(f"{username},{data['streak']},{data['last_date']},{data['highest_streak']}\n")
+            f.write(f"{username},{data['streak']},{data['last_date']},{data['highest_streak']},{data['total_clicks']},{data['total_days_clicked']}\n")
 
 def reset_streaks():
     users = read_users()
