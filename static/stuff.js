@@ -87,8 +87,6 @@ function showRankings() {
                     <td>${row[0]}</td>
                     <td>${row[1].streak}</td>
                     <td>${row[1].clicked_today}</td>
-                    <td>${row[1].total_days_clicked}</td>
-                    <td>${row[1].total_clicks}</td>`;
                 table.appendChild(tr);
             });
         });
