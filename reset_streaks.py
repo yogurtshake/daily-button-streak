@@ -1,5 +1,6 @@
 from datetime import datetime, timedelta
 import os
+import shutil
 try:
     from zoneinfo import ZoneInfo
 except ImportError:
@@ -7,6 +8,7 @@ except ImportError:
 
 BASE_DIR = os.path.dirname(os.path.abspath(__file__))
 DB_FILE = os.path.join(BASE_DIR, 'database.txt')
+ARCHIVE_DIR = os.path.join(BASE_DIR, 'archived')
 
 def read_users():
     users = {}
@@ -30,9 +32,18 @@ def write_users(users):
         for username, data in users.items():
             f.write(f"{username},{data['streak']},{data['last_date']},{data['highest_streak']},{data['total_clicks']},{data['total_days_clicked']}\n")
 
+def archive_database(today):
+    if not os.path.exists(DB_FILE):
+        return
+    os.makedirs(ARCHIVE_DIR, exist_ok=True)
+    archive_file = os.path.join(ARCHIVE_DIR, f'database-{today}.txt')
+    shutil.copy2(DB_FILE, archive_file)
+
 def reset_streaks():
-    users = read_users()
     today = datetime.now(ZoneInfo("America/New_York")).date()
+    archive_database(today.strftime('%Y-%m-%d'))
+    
+    users = read_users()
     yesterday = today - timedelta(days=1)
     
     for username, data in users.items():
